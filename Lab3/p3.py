@@ -20,10 +20,14 @@ def update():
     contents['William Smith'].append('Lorna Carrico')
     contents['Anne Smelcer']=['Christine Phillips', 'Charles Mason', 'Daisy Middleton']
     contents.pop('Mildred Jones')
+   # for x in contents:
+    #    for i in range(len(x)):
+    #        if x[i]=='Mildred Jones':
+    #            x.pop(i)
     for x in contents:
-        for i in range(len(x)):
-            if x[i]=='Mildred Jones':
-                x.pop(i)
+        for y in contents[x]:
+            if y=='Mildred Jones':
+                contents[x].pop(contents[x].index(y))
 
 def get_num_of_followers():
     global contents
