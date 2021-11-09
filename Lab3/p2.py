@@ -16,10 +16,7 @@ def quicksort(lista,listb):
             else:
                 return back + front
         else:
-            backp = random.choice(back)
-            back1 = [x for x in back if x > backp]
-            back2 = [x for x in back if x <= backp]
-            return front+quicksort(back1,back2)
+            return front+quicksort([back[x] for x in range(len(back)) if x < int(len(back)/2)],[back[x] for x in range(len(back)) if x >= int(len(back)/2)])
     elif len(back) <= 1:
         if(front[0]==front[1]):
             if(front>back):
@@ -27,18 +24,7 @@ def quicksort(lista,listb):
             else:
                 return back+front
         else:
-            frontp = random.choice(front)
-            front1 = [x for x in front if x > frontp]
-            front2 = [x for x in front if x <= frontp]
-            return quicksort(front1,front2)+back
+            return quicksort([front[x] for x in range(len(front)) if x < int(len(front)/2)],[front[x] for x in range(len(front)) if x >= int(len(front)/2)])+back
     else:
-        frontp = random.choice(front)
-        front1 = [x for x in front if x > frontp]
-        front2 = [x for x in front if x <= frontp]
-        backp = random.choice(back)
-        back1 = [x for x in back if x > backp]
-        back2 = [x for x in back if x <= backp]
-        return quicksort(front1,front2)+[]+quicksort(back1,back2)
+        return quicksort([front[x] for x in range(len(front)) if x < int(len(front)/2)],[front[x] for x in range(len(front)) if x >= int(len(front)/2)])+[]+quicksort([back[x] for x in range(len(back)) if x < int(len(back)/2)],[back[x] for x in range(len(back)) if x >= int(len(back)/2)])
 
-print(quicksort([], []))
-        
