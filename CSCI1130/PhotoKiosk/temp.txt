@@ -1,0 +1,12 @@
+for(int i=0;i<height;i++)
+      {
+          String contents=reader.nextLine();
+          Scanner readContents=new Scanner(contents);
+          for(int j=0;j<width;j++)
+          {
+              int r=readContents.nextInt();
+              int g=readContents.nextInt();
+              int b=readContents.nextInt();
+              image[i][j]= new Color(r,g,b);
+          }
+      }
