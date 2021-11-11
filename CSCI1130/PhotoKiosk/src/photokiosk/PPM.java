@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.PrintStream;
+import java.io.FileWriter;
 import java.util.Scanner;
+import java.util.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -116,17 +118,57 @@ public class PPM {
   /* student's work here to define extra methods to handle color space conversion, 
      grayscale and saturate */
  
-  
+  public float correct(float x)
+  {
+      if(x<0)
+      {
+          return 0;
+      }
+      else if (x>255)
+      {
+          return 255;
+      }
+      else
+      {
+          return x;
+      }
+  }
   public PPM grayscale() {
- 
-      //double Y = (0.257*r)+(0.504*g)+(0.098*b)+16;
-      //double U = -(0.148 * r) - (0.291 * g) + (0.439 * b) + 128;
-      //double V =  (0.439 * r) - (0.368 * g) - (0.071 * b) + 128;
-      
+      ArrayList<String> result=new ArrayList<String>();
+      for(int i =0 ;i<height;i++)
+      {
+          for (int j =0;j<width;j++)
+          {
+              int r = image[i][j].getRed();
+              int g = image[i][j].getGreen();
+              int b = image[i][j].getBlue();
+              float Y = (float)((0.257*r)+(0.504*g)+(0.098*b)+16)/255;
+              Y=correct(Y);
+              float U = (float)(-(0.148 * r) - (0.291 * g) + (0.439 * b) + 128)/255;
+              U=correct(U);
+              float V =  (float)((0.439 * r) - (0.368 * g) - (0.071 * b) + 128)/255;
+              V=correct(V);
+              result.add(Y+" "+U+" "+V+" ");
+              image[i][j] = new Color(Y,U,V);
+          }
+          result.add("\n");
+      }
+      try{
+      FileWriter myWriter= new FileWriter("grayscale.ppm");
+      String str[]=new String[result.size()];
+      for(int i =0;i<result.size();i++)
+      {
+          str[i]=result.get(i);
+      }
+      myWriter.write(str);
+      }catch(Exception e)
+      {
+          
+      }
   }
   
   public PPM saturate() {
- 
+      
       
       
   }
@@ -150,15 +192,30 @@ public class PPM {
 //      width = reader.nextInt();
 //      height = reader.nextInt();
       maxValue = reader.nextInt();  // get the rest from file      
-
+      image = new Color[height][width];
       System.out.println("Reading PPM image of size " + width + "x" + height);
       // Write your code here      
+      File fileName = new File(filename);
+      Scanner readValue = new Scanner(fileName);
+      for(int i =0;i<3;i++)
+      {
+          readValue.nextLine();
+      }
+    //  System.out.print(readValue.nextInt());
+     for (int i =0;i<height;i++)
+      {
+          for(int j=0;j<width;j++)
+          {
+              int r=readValue.nextInt();
+              
+              int g=readValue.nextInt();
+              
+              int b=readValue.nextInt();
+              
+              image[i][j]= new Color(r,g,b);
+          }
+      }
 
-      
-      
-      
-      
-      
     } catch (Exception e) {
       System.err.println(e);
       image = null;
