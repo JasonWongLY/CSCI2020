@@ -1,6 +1,6 @@
-def get_final_grades(filename='grades.csv'):
+def get_final_grades(filename):
     students_grades={}
-    with open('grades.csv') as file:
+    with open(filename) as file:
         for line in file:
             mark=0
             result=line.replace('\n','').split(',')
