@@ -35,4 +35,5 @@ ans_3=list(map(lambda x:x**2, a))
 ans_4=list(filter(lambda x:x%2==0,a))
 
 # 5
-ans_5=dict(reduce(lambda x,y:x+y,[int(fruit[x].values()) for x in range(len(fruit)) ]))
+import collections
+ans_5=dict(reduce(lambda x,y:x+y,map(collections.Counter,fruit)))
