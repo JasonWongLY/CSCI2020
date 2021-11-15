@@ -1,19 +1,31 @@
 import string
-alpha=list(string.ascii_lowercase)
-number=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-ans_alpha=[]
-ans_number=[]
+stringSample = []
+number = []
+ans_stringSample = []
+ans_number = []
+
+def reset():
+    stringSample[:] = []
+    number [:]= []
+    ans_stringSample [:]= []
+    ans_number [:]= []
+
 def non_unique(xlist):
+    reset()
     for row in xlist:
         for elem in row:
-            number[alpha.index(elem)]+=1
-    j=0
-    while j<26:
-        if number[j]>1:
-            ans_number.append(number[j])
-            ans_alpha.append(alpha[j])
-        j+=1
-    ans=list(zip(ans_alpha,ans_number))
-    print(ans)
+            if stringSample.count(elem)==0:
+                stringSample.append(elem)
+                number.append(1)
+            else:
+                number[stringSample.index(elem)]+=1
 
-non_unique([['a','a'], ['c','e','e','f'], ['d','a'],['e','f']])
+    for i in range(len(number)):
+        if number[i]>2:
+            ans_stringSample.append(stringSample[i])
+            ans_number.append(number[i])
+
+
+    result=dict(zip(ans_stringSample,ans_number))
+    return result
+
