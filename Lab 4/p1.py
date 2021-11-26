@@ -23,17 +23,17 @@ fruit = [
 ]
 
 # 1
-ans_1=[x for x in vehicle_dict if vehicle_dict[x]<=2500]
+list1=[x.upper() for x in vehicle_dict if vehicle_dict[x]<=2500]
 
 # 2
-ans_2=[[str(x)+"x"+str(y)+"="+str(x*y) for y in range(1,x+1)] for x in range(1,10)]
+list2=[" ".join([str(y)+"*"+str(x)+"="+str(x*y) for y in range(1,x+1)]) for x in range(1,10)]
 
 # 3
-ans_3=list(map(lambda x:x**2, a))
+list3=list(map(lambda x:x**2, a))
 
 # 4
-ans_4=list(filter(lambda x:x%2==0,a))
+list4=list(filter(lambda x:x%2==0,a))
 
 # 5
 import collections
-ans_5=dict(reduce(lambda x,y:x+y,map(collections.Counter,fruit)))
+dict5=dict(reduce(lambda x,y:x+y,map(collections.Counter,fruit)))
